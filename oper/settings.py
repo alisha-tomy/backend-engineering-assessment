@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-my!7dkpyt9mmz+*&#_i814ir=_ib+8$y&8j(ds%-i*alkun9p$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'drf_spectacular',
+    'rest_framework.authtoken',
+    'quiz',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +131,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 print(os.getenv("DATABASE_URL"))
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Oper Backend Engineering Assessment',
+    'DESCRIPTION': 'Quiz APIs',
+    'VERSION': '1.0.0',
+}
